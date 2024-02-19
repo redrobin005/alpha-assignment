@@ -2,15 +2,17 @@ import { AppDataSource } from "../data-source"
 import { NextFunction, Request, Response } from "express"
 import { Payment } from "../entity/Payment"
 
-export class PaymentController {
+const paymentFields = ['recipient', 'currency', 'amount', 'date', 'reference']
 
+export class PaymentController {
+    
     private paymentRepository = AppDataSource.getRepository(Payment)
 
     async all(request: Request, response: Response, next: NextFunction) {
         const payments = await this.paymentRepository.find()
 
         if (!payments) throw Error("no payments found")
-        
+
         return payments
     }
 
@@ -30,10 +32,9 @@ export class PaymentController {
         const params = request.query
 
         // check if param exists in Payment entity
-        const payment_fields = ['recipient', 'currency', 'amount', 'date', 'reference']
         const keys = Object.keys(params)
         keys.forEach(element => {
-            if(!payment_fields.includes(element)) throw Error (`${element} is not a valid payment field`)
+            if (!paymentFields.includes(element)) throw Error(`${element} is not a valid payment field`)
         });
 
         const payments = await this.paymentRepository.find({
@@ -47,6 +48,11 @@ export class PaymentController {
 
     async save(request: Request, response: Response, next: NextFunction) {
         const { recipient, currency, amount, date, reference } = request.body;
+
+        // check if any fields are missing/null 
+        paymentFields.forEach(element => {
+            if (!request.body[element]) throw Error(`${element} cannot be empty or null`)
+        });
 
         const payment = Object.assign(new Payment(), {
             recipient,
