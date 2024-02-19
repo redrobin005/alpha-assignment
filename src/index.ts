@@ -35,15 +35,15 @@ AppDataSource.initialize().then(async () => {
     app.listen(PORT)
 
     // insert new payment for test
-    await AppDataSource.manager.save(
-        AppDataSource.manager.create(Payment, {
-            recipient: "Joe Bloggs",
-            currency: "GBP",
-            amount: 10000,
-            date: '10/10/2024',
-            reference: 'Sending my friend money',
-        })
-    )
+    // await AppDataSource.manager.save(
+    //     AppDataSource.manager.create(Payment, {
+    //         recipient: "Joe Bloggs",
+    //         currency: "GBP",
+    //         amount: 10000,
+    //         date: '10/10/2024',
+    //         reference: 'Sending my friend money',
+    //     })
+    // )
 
     console.log("Express server has started on port 3000. Open http://localhost:3000/users to see results")
 

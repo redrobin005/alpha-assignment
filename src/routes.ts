@@ -11,6 +11,11 @@ export const Routes = [{
     controller: PaymentController,
     action: "one"
 }, {
+    method: "get",
+    route: "/filteredPayments/",
+    controller: PaymentController,
+    action: "filtered"
+}, {
     method: "post",
     route: "/payments",
     controller: PaymentController,
