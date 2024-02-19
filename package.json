@@ -15,9 +15,11 @@
       "express": "^4.17.2",
       "pg": "^8.4.0",
       "reflect-metadata": "^0.1.13",
+      "rimraf": "^5.0.5",
       "typeorm": "0.3.20"
    },
    "scripts": {
+      "build": "rimraf dist && npx tsc",
       "start": "ts-node src/index.ts",
       "dev": "nodemon -w *.ts src/index.ts",
       "typeorm": "typeorm-ts-node-commonjs"
