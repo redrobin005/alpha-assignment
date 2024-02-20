@@ -1,4 +1,15 @@
 services:
+  react-app:
+    image: react-app
+    stdin_open: true
+    ports:
+      - "5173:5173"
+  api-server:
+    image: api-server
+    depends_on:
+      - postgres
+    ports:
+    - "3000:3000"
   postgres:
     image: postgres
     environment:
@@ -9,11 +20,5 @@ services:
       - pgdata:/var/lib/postgresql/data
     ports:
       - '5432:5432'
-  api-server:
-    image: api-server
-    depends_on:
-      - postgres
-    ports:
-    - "3000:3000"
 volumes:
   pgdata:
