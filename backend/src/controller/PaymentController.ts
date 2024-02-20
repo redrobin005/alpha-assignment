@@ -11,8 +11,6 @@ export class PaymentController {
     async all(request: Request, response: Response, next: NextFunction) {
         const payments = await this.paymentRepository.find()
 
-        if (!payments) throw Error("no payments found")
-
         return payments
     }
 
@@ -54,13 +52,13 @@ export class PaymentController {
             if (!request.body[element]) throw Error(`${element} cannot be empty or null`)
         });
 
-        const payment = Object.assign(new Payment(), {
-            recipient,
-            currency,
-            amount,
-            date,
-            reference
-        })
+    const payment = Object.assign(new Payment(), {
+        recipient,
+        currency,
+        amount,
+        date,
+        reference
+    })
 
         return this.paymentRepository.save(payment)
     }

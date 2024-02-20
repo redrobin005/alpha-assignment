@@ -15,3 +15,14 @@ export const AppDataSource = new DataSource({
     migrations: [],
     subscribers: [],
 })
+
+export const TestAppDataSource = new DataSource({
+    type: 'sqlite',
+    database: ':memory:',
+    dropSchema: true,
+    entities: [Payment],
+    synchronize: true,
+    logging: false,
+    name: 'testConnection',
+    migrations: [],
+})

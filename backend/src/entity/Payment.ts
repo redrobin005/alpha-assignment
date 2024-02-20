@@ -1,6 +1,7 @@
-import { Entity, PrimaryGeneratedColumn, Column } from "typeorm"
+import { Entity, Check, PrimaryGeneratedColumn, Column } from "typeorm"
 
 @Entity()
+@Check('"amount" > 0')
 export class Payment {
 
     @PrimaryGeneratedColumn()
@@ -11,7 +12,7 @@ export class Payment {
 
     @Column()
     amount: number
-
+    
     @Column()
     date: string
 
