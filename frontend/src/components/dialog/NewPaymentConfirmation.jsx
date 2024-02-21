@@ -1,5 +1,3 @@
-import { useState } from 'react';
-
 import Button from '@mui/material/Button';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
@@ -29,22 +27,22 @@ export default function NewPaymentConfirmation({ formFields, handleSubmit }) {
                         </Typography>
                         {Object.keys(formFields).map(name => {
                             return (
-                                <>
-                                    <Grid container sx={{ justifyContent: "space-between", marginTop: 2 }} >
+                                <Grid key={crypto.randomUUID()}>
+                                    <Grid container sx={{ justifyContent: "space-between", marginTop: 2 }}>
                                         <Grid>
-                                            <Typography sx={{ fontSize: 14 }} key={name}>
+                                            <Typography sx={{ fontSize: 14 }}>
                                                 {fieldNames[name]}
                                             </Typography>
                                         </Grid>
                                         <Grid>
-                                            <Typography sx={{ fontSize: 14 }} key={name}>
+                                            <Typography sx={{ fontSize: 14 }}>
                                                 {name === 'date' ? formFields[name]['$d'].toLocaleDateString("en-GB")
                                                     : formFields[name]}
                                             </Typography>
                                         </Grid>
                                     </Grid>
-                                    <Divider key={name}></Divider>
-                                </>
+                                    <Divider></Divider>
+                                </Grid>
                             )
                         })}
                     </CardContent>

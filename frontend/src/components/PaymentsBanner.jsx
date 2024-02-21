@@ -3,13 +3,14 @@ import ControlPointIcon from '@mui/icons-material/ControlPoint';
 import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
-import NewPaymentDialog from './NewPaymentDialog';
+import NewPaymentDialog from './dialog/NewPaymentDialog';
 import { useState } from 'react';
 
 
 const drawerWidth = 60;
+const fields = ['recipient, currency, amount', 'date', 'reference']
 
-export default function PaymentsBanner() {
+export default function PaymentsBanner({ setOpenSuccessAlert }) {
     const [open, setOpen] = useState(false)
     const [page, setPage] = useState(0)
     const [formFields, setFormFields] = useState({
@@ -20,17 +21,18 @@ export default function PaymentsBanner() {
         'reference': '',
     })
     const [formErrors, setFormErrors] = useState({
-        'recipient': {'error': false, 'helperText': ''},
-        'currency': {'error': false, 'helperText': ''},
-        'amount': {'error': false, 'helperText': ''},
-        'date': {'error': false, 'helperText': ''},
-        'reference': {'error': false, 'helperText': ''},
+        'recipient': { 'error': false, 'helperText': '' },
+        'currency': { 'error': false, 'helperText': '' },
+        'amount': { 'error': false, 'helperText': '' },
+        'date': { 'error': false, 'helperText': '' },
+        'reference': { 'error': false, 'helperText': '' },
     })
 
     const handleOpen = () => {
         setOpen(true);
     };
     const handleClose = () => {
+        // reset all states in form upon close
         setOpen(false);
         setFormFields({
             'recipient': '',
@@ -38,6 +40,13 @@ export default function PaymentsBanner() {
             'amount': '',
             'date': null,
             'reference': '',
+        })
+        setFormErrors({
+            'recipient': { 'error': false, 'helperText': '' },
+            'currency': { 'error': false, 'helperText': '' },
+            'amount': { 'error': false, 'helperText': '' },
+            'date': { 'error': false, 'helperText': '' },
+            'reference': { 'error': false, 'helperText': '' },
         })
         setPage(0)
     };
@@ -62,7 +71,7 @@ export default function PaymentsBanner() {
                 </Typography>
                 <Button
                     variant="contained"
-                    sx={{backgroundColor: '#3780B6'}}
+                    sx={{ backgroundColor: '#3780B6' }}
                     startIcon={<ControlPointIcon />}
                     onClick={handleOpen}>
                     New Payment
@@ -76,6 +85,7 @@ export default function PaymentsBanner() {
                     handleChange={handleChange}
                     formErrors={formErrors}
                     setFormErrors={setFormErrors}
+                    setOpenSuccessAlert={setOpenSuccessAlert}
                 ></NewPaymentDialog>
             </Toolbar>
         </AppBar>
