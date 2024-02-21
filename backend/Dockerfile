@@ -5,7 +5,7 @@ WORKDIR /usr/app
 
 # Install app dependencies
 # Copy is done here for caching
-COPY package*.json ./
+COPY package.json ./
 
 RUN npm install
 

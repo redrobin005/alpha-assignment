@@ -5,7 +5,7 @@ import { Payment } from "../entity/Payment"
 const paymentFields = ['recipient', 'currency', 'amount', 'date', 'reference']
 
 export class PaymentController {
-    
+
     private paymentRepository = AppDataSource.getRepository(Payment)
 
     async all(request: Request, response: Response, next: NextFunction) {
@@ -52,13 +52,20 @@ export class PaymentController {
             if (!request.body[element]) throw Error(`${element} cannot be empty or null`)
         });
 
-    const payment = Object.assign(new Payment(), {
-        recipient,
-        currency,
-        amount,
-        date,
-        reference
-    })
+        // check for valid amount
+        if (amount < 0) throw Error('amount must be a positive number')
+
+        // check for valid date
+        const regex = /^(0[1-9]|[12][0-9]|3[01])[- /.](0[1-9]|1[012])[- /.](19|20)\d\d$/
+        if (!regex.test(date)) throw Error('date string must be a valid date in the format dd/mm/yyyy')
+
+        const payment = Object.assign(new Payment(), {
+            recipient,
+            currency,
+            amount,
+            date,
+            reference
+        })
 
         return this.paymentRepository.save(payment)
     }
