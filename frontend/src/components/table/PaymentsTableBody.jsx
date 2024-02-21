@@ -11,11 +11,11 @@ export default function PaymentsTableBody({ payments }) {
                     key={payment.id}
                     sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                 >
-                    <TableCell component="th" scope="row">
-                        {`P-ID${payment.id}`}
-                    </TableCell>
+                    <TableCell component="th" scope="row">{`P-ID${payment.id}`}</TableCell>
                     <TableCell align="left">{payment.recipient}</TableCell>
-                    <TableCell align="left">{payment.currency}{payment.amount}</TableCell>
+                    <TableCell align="left">
+                        {payment.currency}{'  '}{payment.amount}
+                    </TableCell>
                     <TableCell align="left">{payment.date}</TableCell>
                     <TableCell align="left">{payment.reference}</TableCell>
                 </TableRow>

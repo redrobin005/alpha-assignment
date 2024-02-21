@@ -10,7 +10,7 @@ import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 
 export default function BottomIcons() {
     return (
-        <List sx={{ mt: 8 }}>
+        <List sx={{ mt: 10 }}>
             <ListItem disablePadding>
                 <ListItemButton>
                     <ListItemIcon>

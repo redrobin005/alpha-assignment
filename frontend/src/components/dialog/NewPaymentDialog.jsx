@@ -43,8 +43,10 @@ export default function NewPaymentDialog({
             .then(res => {
                 if (res.status === 201) {
                     console.log('Payment successfully created!')
-                    window.location.reload()
                     setOpenSuccessAlert(true)
+                    setTimeout(() =>{
+                        window.location.reload()
+                    }, 1000)
                 } else {
                     console.log('Unsuccessful payment creation')
                 }
